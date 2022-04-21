@@ -1,26 +1,25 @@
-#make array constants with the ascii code for letters
-SMALLS = Array.new(26){|index| index + 97 }
-CAPITALS = Array.new(26) {|index| index + 65 }
-
 def caesar_cipher(phrase, shift_factor)
   new_caps = Array.new #to put the wraped capitals
   new_smalls = Array.new #to put the wraped smalls
   new_codes = Array.new #to put the shifted ascii codes
-  
+  smalls = Array.new(26){|index| index + 97 }
+  smalls.cycle(2){|element| new_smalls.push(element)} #make the smalls wrap from z to a
+  capitals = Array.new(26){|index| index + 65 }
+  capitals.cycle(2){|element| new_caps.push(element)} #make the capitals wrap from Z to A
   codes = phrase.bytes #convert the string to ascii code
 
   codes.each do |num|
   
-    if CAPITALS.include?(num) 
+    if capitals.include?(num) 
     
-        index = CAPITALS.index(num) #get the index of num in CAPITALS array
-        CAPITALS.cycle(2){|element| new_caps.push(element)} #make the CAPITALS wrap from Z to A
+        index = capitals.index(num) #get the index of num in capitals array
+        
         new_codes.push(new_caps[index + shift_factor])
 
-    elsif SMALLS.include?(num) 
+    elsif smalls.include?(num) 
     
-        index = SMALLS.index(num)
-        SMALLS.cycle(2){|element| new_smalls.push(element)} #make the SMALLS wrap from z to a
+        index = smalls.index(num)
+        
         new_codes.push(new_smalls[index + shift_factor])
 
     else 
@@ -28,7 +27,9 @@ def caesar_cipher(phrase, shift_factor)
     end 
     
   end
-p new_codes
-p new_codes.pack('c*')
+    #p new_codes
+  p new_codes.pack('c*')
+  
 end
-caesar_cipher("What a string!", 5)
+
+caesar_cipher("What a string!",5)
