@@ -1,5 +1,6 @@
 # Caesar-Cipher
 Ruby small project
+
 It's the first assignment in Ruby at "The Odin Project".
              https://www.theodinproject.com/lessons/ruby-caesar-cipher
 
